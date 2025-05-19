@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:software_task/features/admin_home/ui/admin_home_view.dart';
 import 'package:software_task/features/auth/ui/register/view/register_view.dart';
 import 'core/config/theme/app_theme.dart';
+import 'features/user_home/ui/user_home_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

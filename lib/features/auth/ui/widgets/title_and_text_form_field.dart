@@ -13,6 +13,7 @@ class TitleAndTextFormField extends StatelessWidget {
     this.isObscure = false,
     this.maxLines,
     this.enabled = true,
+    this.filledColor,
   });
 
   final TextEditingController controller;
@@ -22,6 +23,7 @@ class TitleAndTextFormField extends StatelessWidget {
   final bool isObscure;
   final int? maxLines;
   final bool enabled;
+  final Color? filledColor;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +46,7 @@ class TitleAndTextFormField extends StatelessWidget {
           validator: validator,
           obscureText: isObscure,
           maxLines: maxLines ?? 1,
+          filledColor: filledColor,
         ),
         const SizedBox(
           height: 10,

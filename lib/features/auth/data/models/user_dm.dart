@@ -20,6 +20,10 @@ class UserDM {
 
   // Static list of users
   static final List<UserDM> users = [
+    UserDM(
+      email: "admin@gmail.com",
+      password: "admin",
+    ),
   ];
 
   // Add a new user to the static list
@@ -73,4 +77,4 @@ class UserDM {
       return null;
     }
   }
-} 
+}

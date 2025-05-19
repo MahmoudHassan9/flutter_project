@@ -35,7 +35,11 @@ class _RoomsTabState extends State<RoomsTab> {
       itemCount: rooms.length,
       itemBuilder: (context, index) {
         final room = rooms[index];
-        return Card(
+        return Container(
+          decoration: BoxDecoration(
+            color: AppColors.blue.withOpacity(0.2),
+            borderRadius: BorderRadius.circular(12),
+          ),
           margin: const EdgeInsets.only(bottom: 16),
           child: InkWell(
             onTap: () {
@@ -51,7 +55,7 @@ class _RoomsTabState extends State<RoomsTab> {
               children: [
                 ClipRRect(
                   borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(4)),
+                      const BorderRadius.vertical(top: Radius.circular(12)),
                   child: Image.asset(
                     AppConstants.roomImage,
                     height: 200,

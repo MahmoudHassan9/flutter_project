@@ -39,38 +39,38 @@ class _LoginViewState extends State<LoginView> {
 
   void _handleLogin() {
     if (!formKey.currentState!.validate()) return;
+    // Check user credentials
+    final user = UserDM.findUser(emailController.text, passwordController.text);
 
-    if (AppConstants.adminEmail == emailController.text &&
-        AppConstants.adminPassword == passwordController.text) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const AdminHomeView(),
-        ),
-      );
-    } else {
-      // Check user credentials
-      final user = UserDM.findUser(emailController.text, passwordController.text);
-      
-      if (user != null) {
+    if (user != null) {
+      if (user.email == AppConstants.adminEmail &&
+          user.password == AppConstants.adminPassword) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const UserHomeView(),
+            builder: (context) => const AdminHomeView(),
           ),
         );
-        AppDialogs.showMessage(
-          context,
-          message: 'Welcome back, ${user.fullName}!',
-          color: Colors.green,
-        );
-      } else {
-        AppDialogs.showMessage(
-          context,
-          message: 'Invalid email or password',
-          color: Colors.red,
-        );
       }
+      else {
+        Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const UserHomeView(),
+        ),
+      );
+      }
+      AppDialogs.showMessage(
+        context,
+        message: 'Welcome back, ${user.fullName}!',
+        color: Colors.green,
+      );
+    } else {
+      AppDialogs.showMessage(
+        context,
+        message: 'Invalid email or password',
+        color: Colors.red,
+      );
     }
   }
 

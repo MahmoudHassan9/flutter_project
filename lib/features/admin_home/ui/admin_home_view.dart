@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:software_task/features/admin_home/ui/widgets/add_room_screen.dart';
 import 'package:software_task/features/admin_home/ui/widgets/rooms_list_view.dart';
+import 'package:software_task/features/auth/ui/login/view/login_view.dart';
 
 import '../../../core/utils/app_colors.dart';
 
@@ -14,10 +15,26 @@ class AdminHomeView extends StatelessWidget {
         title: const Text(
           'Rooms',
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LoginView(),
+                ),
+              );
+            },
+            icon:const  Icon(
+              Icons.logout,
+              color: AppColors.white,
+            ),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => const AddRoomScreen(),
@@ -35,7 +52,9 @@ class AdminHomeView extends StatelessWidget {
           horizontal: 16,
           vertical: 16,
         ),
-        child: RoomsListView(isAdmin: true,),
+        child: RoomsListView(
+          isAdmin: true,
+        ),
       ),
     );
   }

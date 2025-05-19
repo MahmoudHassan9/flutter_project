@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:software_task/features/admin_home/data/models/room_dm.dart';
 import 'package:software_task/features/admin_home/ui/widgets/room_item.dart';
 import 'package:software_task/features/user_home/ui/widgets/room_details.dart';
-import 'package:software_task/features/user_home/ui/widgets/user_room_item.dart';
-
 import 'edit_room_screen.dart';
 
 class RoomsListView extends StatefulWidget {
@@ -43,38 +41,33 @@ class _RoomsListViewState extends State<RoomsListView> {
       padding: EdgeInsets.zero,
       scrollDirection: Axis.vertical,
       itemBuilder: (context, index) => GestureDetector(
-        onTap: () {
-          if (widget.isAdmin) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => EditRoomScreen(
-                  roomDM: rooms[index],
+          onTap: () {
+            if (widget.isAdmin) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditRoomScreen(
+                    roomDM: rooms[index],
+                  ),
                 ),
-              ),
-            ).then((_) {
-              // Reload rooms after returning from edit screen
-              _loadRooms();
-            });
-          } else {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => RoomDetails(
-                  model: rooms[index],
+              ).then((_) {
+                // Reload rooms after returning from edit screen
+                _loadRooms();
+              });
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RoomDetails(
+                    model: rooms[index],
+                  ),
                 ),
-              ),
-            );
-          }
-        },
-        child: widget.isAdmin
-            ? RoomItem(
-                roomDM: rooms[index],
-              )
-            : UserRoomItem(
-                model: rooms[index],
-              ),
-      ),
+              );
+            }
+          },
+          child: RoomItem(
+            roomDM: rooms[index],
+          )),
       itemCount: rooms.length,
       separatorBuilder: (context, index) => const SizedBox(
         height: 15,

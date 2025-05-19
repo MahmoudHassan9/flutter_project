@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:software_task/features/admin_home/ui/widgets/rooms_list_view.dart';
 import 'package:software_task/features/user_home/ui/widgets/booking_list_tab.dart';
+import 'package:software_task/features/user_home/ui/widgets/profile_tab.dart';
 import 'package:software_task/features/user_home/ui/widgets/rooms_tab.dart';
 
 class UserHomeView extends StatefulWidget {
@@ -13,9 +13,10 @@ class UserHomeView extends StatefulWidget {
 class _UserHomeViewState extends State<UserHomeView> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages =const [
+  final List<Widget> _pages = const [
     RoomsTab(),
     BookingListTab(),
+    ProfileTab(),
   ];
 
   void _onItemTapped(int index) {
@@ -29,7 +30,11 @@ class _UserHomeViewState extends State<UserHomeView> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _selectedIndex == 0 ? 'Rooms' : 'Booking List',
+          _selectedIndex == 0 
+              ? 'Rooms' 
+              : _selectedIndex == 1 
+                  ? 'Booking List' 
+                  : 'Profile',
         ),
       ),
       body: _pages[_selectedIndex],
@@ -42,6 +47,10 @@ class _UserHomeViewState extends State<UserHomeView> {
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
             label: 'Booking List',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
