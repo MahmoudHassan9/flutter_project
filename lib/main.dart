@@ -5,7 +5,6 @@ import 'core/config/theme/app_theme.dart';
 import 'features/user_home/ui/user_home_view.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

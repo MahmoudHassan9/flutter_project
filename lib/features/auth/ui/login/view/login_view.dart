@@ -51,20 +51,24 @@ class _LoginViewState extends State<LoginView> {
             builder: (context) => const AdminHomeView(),
           ),
         );
-      }
-      else {
+        AppDialogs.showMessage(
+          context,
+          message: 'Welcome back, Admin!',
+          color: Colors.green,
+        );
+      } else {
         Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const UserHomeView(),
-        ),
-      );
+          context,
+          MaterialPageRoute(
+            builder: (context) => const UserHomeView(),
+          ),
+        );
+        AppDialogs.showMessage(
+          context,
+          message: 'Welcome back, ${user.fullName}!',
+          color: Colors.green,
+        );
       }
-      AppDialogs.showMessage(
-        context,
-        message: 'Welcome back, ${user.fullName}!',
-        color: Colors.green,
-      );
     } else {
       AppDialogs.showMessage(
         context,

@@ -41,7 +41,7 @@ class _RoomsTabState extends State<RoomsTab> {
             borderRadius: BorderRadius.circular(12),
           ),
           margin: const EdgeInsets.only(bottom: 16),
-          child: InkWell(
+          child: GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
@@ -54,8 +54,11 @@ class _RoomsTabState extends State<RoomsTab> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(12)),
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(
+                      12,
+                    ),
+                  ),
                   child: Image.asset(
                     AppConstants.roomImage,
                     height: 200,
@@ -104,11 +107,13 @@ class _RoomsTabState extends State<RoomsTab> {
                         ],
                       ),
                       const SizedBox(height: 12),
-                      _buildInfoRow('Price', '\$${room.price.toStringAsFixed(2)}/night'),
+                      _buildInfoRow(
+                          'Price', '\$${room.price.toStringAsFixed(2)}/night'),
                       const SizedBox(height: 8),
                       _buildInfoRow('Capacity', '${room.capacity} persons'),
                       const SizedBox(height: 8),
-                      _buildInfoRow('Description', room.description, maxLines: 2),
+                      _buildInfoRow('Description', room.description,
+                          maxLines: 2),
                       const SizedBox(height: 12),
                       if (room.isAvailable)
                         SizedBox(
@@ -191,6 +196,7 @@ class _RoomsTabState extends State<RoomsTab> {
 
     // Update room availability
     RoomDM.updateRoomAvailability(room.id, false);
+
     setState(() {});
 
     // Show success message

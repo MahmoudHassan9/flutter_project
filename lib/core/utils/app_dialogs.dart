@@ -12,7 +12,6 @@ abstract class AppDialogs {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-
             message,
             textAlign: TextAlign.center,
             style: AppStyles.settingsTabLabel.copyWith(

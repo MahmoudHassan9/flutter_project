@@ -21,7 +21,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   late TextEditingController emailController;
   String? selectedGender;
   GlobalKey<FormState> formKey = GlobalKey();
-  
+
   // Track changed fields
   bool isFullNameChanged = false;
   bool isPhoneNumberChanged = false;
@@ -32,23 +32,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void initState() {
     super.initState();
     fullNameController = TextEditingController(text: widget.user.fullName);
-    phoneNumberController = TextEditingController(text: widget.user.phoneNumber);
+    phoneNumberController =
+        TextEditingController(text: widget.user.phoneNumber);
     emailController = TextEditingController(text: widget.user.email);
     selectedGender = widget.user.gender;
-    
+
     // Add listeners to detect changes
     fullNameController.addListener(() {
       setState(() {
         isFullNameChanged = fullNameController.text != widget.user.fullName;
       });
     });
-    
+
     phoneNumberController.addListener(() {
       setState(() {
-        isPhoneNumberChanged = phoneNumberController.text != widget.user.phoneNumber;
+        isPhoneNumberChanged =
+            phoneNumberController.text != widget.user.phoneNumber;
       });
     });
-    
+
     emailController.addListener(() {
       setState(() {
         isEmailChanged = emailController.text != widget.user.email;
@@ -66,15 +68,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   void _saveProfile() {
     if (!formKey.currentState!.validate()) return;
-    
-    if (selectedGender == null) {
-      AppDialogs.showMessage(
-        context,
-        message: 'Please select your gender',
-        color: Colors.red,
-      );
-      return;
-    }
 
     // Check if anything has changed
     bool hasChanges = isFullNameChanged ||
@@ -86,15 +79,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       AppDialogs.showMessage(
         context,
         message: 'No changes to save',
-        color: AppColors.blue,
+        color: Colors.orange,
       );
       return;
     }
 
     // Check if email already exists for other users
-    final isEmailExistForOthers = UserDM.users.any((user) => 
-      user.email == emailController.text && user.id != widget.user.id);
-      
+    final isEmailExistForOthers = UserDM.users.any((user) =>
+        user.email == emailController.text && user.id != widget.user.id);
+
     if (isEmailExistForOthers) {
       AppDialogs.showMessage(
         context,
@@ -116,7 +109,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     // Update user in static list
     UserDM.updateUser(updatedUser);
-    
+
     // Update current user email if it has changed
     if (widget.user.email != emailController.text) {
       UserDM.currentUserEmail = emailController.text;
@@ -171,7 +164,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   controller: fullNameController,
                   title: 'Full Name',
                   hint: 'Enter your full name',
-                  filledColor: isFullNameChanged ? Colors.blue.withOpacity(0.1) : null,
+                  filledColor:
+                      isFullNameChanged ? Colors.blue.withOpacity(0.1) : null,
                   validator: (input) {
                     if (input == null || input.trim().isEmpty) {
                       return 'Full name is required';
@@ -186,7 +180,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   controller: phoneNumberController,
                   title: 'Phone Number',
                   hint: 'Enter your phone number',
-                  filledColor: isPhoneNumberChanged ? Colors.blue.withOpacity(0.1) : null,
+                  filledColor: isPhoneNumberChanged
+                      ? Colors.blue.withOpacity(0.1)
+                      : null,
                   validator: (input) {
                     if (input == null || input.trim().isEmpty) {
                       return 'Phone number is required';
@@ -201,7 +197,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   controller: emailController,
                   title: 'Email',
                   hint: 'Enter your email',
-                  filledColor: isEmailChanged ? Colors.blue.withOpacity(0.1) : null,
+                  filledColor:
+                      isEmailChanged ? Colors.blue.withOpacity(0.1) : null,
                   validator: (input) {
                     if (input == null || input.trim().isEmpty) {
                       return 'Email is required';
@@ -225,7 +222,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     const SizedBox(height: 5),
                     Container(
                       decoration: BoxDecoration(
-                        color: isGenderChanged ? Colors.blue.withOpacity(0.1) : Colors.transparent,
+                        color: isGenderChanged
+                            ? Colors.blue.withOpacity(0.1)
+                            : Colors.transparent,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Row(
@@ -274,9 +273,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       disabledBackgroundColor: Colors.grey.withOpacity(0.3),
                       disabledForegroundColor: Colors.grey,
                     ),
-                    onPressed: isFullNameChanged || isPhoneNumberChanged || isEmailChanged || isGenderChanged 
-                        ? _saveProfile 
-                        : null,
+                    onPressed: _saveProfile,
                     child: const Text('Save'),
                   ),
                 ),
@@ -287,4 +284,4 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
     );
   }
-} 
+}
